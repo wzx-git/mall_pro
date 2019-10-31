@@ -1,10 +1,23 @@
-
 server:
-  port: 8762
+  port: 8080
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
   application:
     name: orderService
+mybatis:
+  mapper-locations: classpath:/mappers/*.xml
+  type-aliases-package: com.mr.mall.mall_order.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+
