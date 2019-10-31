@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mr.mall.mall_promotion.mapper.SmsFlashPromotionMapper">
+
+    <select id="findSmsFlashPromotionList" resultType="com.mr.mall.mall_promotion.entity.SmsFlashPromotion" parameterType="java.util.Map">
+        select * from sms_flash_promotion
+            <if test="keyword!=null and keyword!=''" >
+                where title like concat('%',#{keyword},'%')
+            </if>
+        LIMIT #{page.startNum} ,#{page.pageSize}
+    </select>
+    <select id="getTotal" resultType="Integer" parameterType="java.lang.String">
+        select count(*) from  sms_flash_promotion where title like concat('%',#{keyword},'%')
+    </select>
+
+    <update id="updatePromotion" parameterType="map">
+        update sms_flash_promotion set status =#{status} WHERE id=#{id}
+    </update>
+</mapper>

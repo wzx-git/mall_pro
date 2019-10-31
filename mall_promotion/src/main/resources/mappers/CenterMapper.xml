@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from sms_home_recommend_subject
 	</select>
 
-	<select id="getList" resultType="center" parameterType="center">
+	<select id="getList" resultType="com.mr.mall.mall_promotion.entity.Center" parameterType="com.mr.mall.mall_promotion.entity.Center">
 		SELECT * FROM sms_home_recommend_subject LIMIT #{startNum},#{pageSize}
 	</select>
 	

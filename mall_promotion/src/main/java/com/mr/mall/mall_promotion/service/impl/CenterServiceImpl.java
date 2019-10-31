@@ -18,8 +18,6 @@ import java.util.List;
 public class CenterServiceImpl implements CenterService{
     @Autowired
     private CenterMapper centerMapper;
-
-
     @Override
     public CommonResult<PageUtil<Center>> getList(Integer pageNum, Integer pageSize) {
 

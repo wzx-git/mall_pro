@@ -7,7 +7,7 @@ import java.sql.Timestamp;
  */
 
 
-    public class Center {
+public class Center {
 
         private Long id;
         private Long subjectId;
