@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by Happy on 2019/10/28.
  */
@@ -17,7 +19,12 @@ public class CenterController {
     @Autowired
     private CenterService centerService;
 
-
+    /**
+     * 分页查询
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
     @GetMapping("/centerList")
     @ResponseBody
     public CommonResult<PageUtil<Center>>centerList(@RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
@@ -25,11 +32,4 @@ public class CenterController {
         CommonResult<PageUtil<Center>> data = centerService.getList(pageNum,pageSize);
         return data;
     }
-
-
-
-
-
-
-
 }
