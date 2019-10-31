@@ -5,6 +5,7 @@ import com.mr.mall.mall_comment.service.IShrpService;
 import com.mr.mall.mall_comment.utils.CommonResult;
 import com.mr.mall.mall_comment.utils.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

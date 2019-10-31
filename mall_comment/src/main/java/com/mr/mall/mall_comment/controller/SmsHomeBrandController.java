@@ -15,6 +15,7 @@ import java.util.List;
  */
 @RequestMapping("/home/brand")
 @Controller
+
 public class SmsHomeBrandController {
 
 
