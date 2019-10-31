@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mr.mall.mall_comment.mapper.SmsHomeBrandMapper">
+  <delete id="deletes" parameterType="java.util.List">
+      DELETE FROM sms_home_brand WHERE id IN
+      <foreach collection="list" open="(" close=")" separator="," item="id">
+          #{id}
+      </foreach>
+  </delete>
+
+
+  <!--<select id="findTotalNum" parameterType="com.mr.mall.mall_comment.entity.SmsHomeBrand" resultType="int">
+    select count(*) from t_employee e
+    left join
+    t_dept d
+    on e.emp_dept = d.dept_id
+
+    <where>
+      <if test="ename!=null and ename!=''">
+        e.emp_name like CONCAT('%',#{ename},'%')
+      </if>
+      <if test="edept!=null and edept!=''">
+        and e.emp_dept=#{edept}
+      </if>
+      <if test="minDate!=null">
+        and e.emp_date &gt;= #{minDate}
+      </if>
+      <if test="maxDate!=null">
+        and e.emp_date &lt;= #{maxDate}
+      </if>
+    </where>
+  </select>-->
+
+
+  <select id="findHomeBrand" parameterType="com.mr.mall.mall_comment.entity.SmsHomeBrand" resultType="com.mr.mall.mall_comment.entity.SmsHomeBrand">
+    select * FROM sms_home_brand limit #{startNum},#{pageSize}
+  </select>
+
+
+  <select id="getTotal" resultType="java.lang.Integer">
+    select COUNT(*) FROM sms_home_brand
+  </select>
+
+</mapper>
