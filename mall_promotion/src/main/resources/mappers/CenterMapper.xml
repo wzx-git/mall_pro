@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 
+	通过namespace将mapper接口引入
+-->
+<mapper namespace="com.mr.mall.mall_promotion.mapper.CenterMapper">
+	<select id="getTotal" resultType="int">
+		select count(*) from sms_home_recommend_subject
+	</select>
+
+	<select id="getList" resultType="center" parameterType="center">
+		SELECT * FROM sms_home_recommend_subject LIMIT #{startNum},#{pageSize}
+	</select>
+	
+</mapper>

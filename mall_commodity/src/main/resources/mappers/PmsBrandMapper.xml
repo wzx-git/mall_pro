@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mr.mall.mall_commodity.mapper.PmsBrandMapper">
+
+    <!--删除-->
+    <delete id="deleteBrand" parameterType="java.lang.Integer">
+        delete  from pms_brand where id=#{id}
+    </delete>
+
+    <!--查询每页条数-->
+    <select id="getBrandList" resultType="com.mr.mall.mall_commodity.entity.PmsBrand">
+        select * from pms_brand LIMIT #{startNum} ,#{pageSize}
+    </select>
+
+    <!--查询总条数-->
+    <select id="getBrandTotal" resultType="java.lang.Integer">
+        select count(*)   from pms_brand
+    </select>
+
+    <!--根据id进行查询-->
+    <select id="selectBrandById" resultType="com.mr.mall.mall_commodity.entity.PmsBrand" parameterType="java.lang.Integer">
+        select * from pms_brand where id=#{id}
+    </select>
+
+    <!--修改-->
+    <update id="updateBrand"  parameterType="com.mr.mall.mall_commodity.entity.PmsBrand">
+        update pms_brand
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="firstLetter != null">
+                first_letter = #{firstLetter},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="factoryStatus != null">
+                factory_status = #{factoryStatus},
+            </if>
+            <if test="showStatus != null">
+                show_status = #{showStatus},
+            </if>
+            <if test="productCount != null">
+                product_count = #{productCount},
+            </if>
+            <if test="productCommentCount != null">
+                product_comment_count = #{productCommentCount},
+            </if>
+            <if test="logo != null">
+                logo = #{logo},
+            </if>
+            <if test="bigPic != null">
+                big_pic = #{bigPic},
+            </if>
+            <if test="brandStory != null">
+                brand_story = #{brandStory},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <!--批量更新厂家制造商状态-->
+    <update id="updateFactoryStatus" parameterType="com.mr.mall.mall_commodity.entity.PmsBrand">
+        update pms_brand
+        <set>
+            <if test="record.id != null">
+                id = #{record.id},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name},
+            </if>
+            <if test="record.firstLetter != null">
+                first_letter = #{record.firstLetter},
+            </if>
+            <if test="record.sort != null">
+                sort = #{record.sort},
+            </if>
+            <if test="record.factoryStatus != null">
+                factory_status = #{record.factoryStatus},
+            </if>
+            <if test="record.showStatus != null">
+                show_status = #{record.showStatus},
+            </if>
+            <if test="record.productCount != null">
+                product_count = #{record.productCount},
+            </if>
+            <if test="record.productCommentCount != null">
+                product_comment_count = #{record.productCommentCount},
+            </if>
+            <if test="record.logo != null">
+                logo = #{record.logo},
+            </if>
+            <if test="record.bigPic != null">
+                big_pic = #{record.bigPic},
+            </if>
+            <if test="record.brandStory != null">
+                brand_story = #{record.brandStory},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+
+
+</mapper>
