@@ -16,4 +16,9 @@ public interface ISmsHomeBrandService {
 
 
     CommonResult deletes(List<Long> ids);
+
+
+    CommonResult updateSort(Long id, Integer sort);
+
+    CommonResult updateStatus(List<Long> ids, Integer recommendStatus);
 }

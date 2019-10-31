@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mr.mall.mall_comment.mapper.SmsHomeBrandMapper">
-  <delete id="deletes" parameterType="java.util.List">
+    <update id="updateSort" parameterType="java.util.Map">
+         UPDATE sms_home_brand SET sort = #{sort} WHERE id = #{id}
+    </update>
+
+
+
+    <update id="updateStatus" parameterType="java.util.Map">
+        <foreach collection="ids" item="id" separator=";" close=";" >
+            update sms_home_brand set recommend_status=#{recommendStatus} where id=#{id}
+        </foreach>
+    </update>
+
+
+    <delete id="deletes" parameterType="java.util.List">
       DELETE FROM sms_home_brand WHERE id IN
       <foreach collection="list" open="(" close=")" separator="," item="id">
           #{id}

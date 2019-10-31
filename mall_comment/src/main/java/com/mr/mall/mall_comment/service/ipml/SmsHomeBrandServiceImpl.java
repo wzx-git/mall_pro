@@ -8,7 +8,9 @@ import com.mr.mall.mall_comment.utils.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by XuanAndWang on 2019/10/26.
@@ -46,6 +48,32 @@ public class SmsHomeBrandServiceImpl implements ISmsHomeBrandService {
     public CommonResult deletes(List<Long> ids) {
         CommonResult comm = new CommonResult();
         Integer count = smsHomeBrandMapper.deletes(ids);
+        comm.setData(count);
+        comm.setCode(200);
+        comm.setMessage("操作成功");
+        return comm;
+    }
+
+    @Override
+    public CommonResult updateSort(Long id, Integer sort) {
+        CommonResult comm = new CommonResult();
+        Map<String,Object> params = new HashMap<>();
+        params.put("id",id);
+        params.put("sort",sort);
+        Integer count = smsHomeBrandMapper.updateSort(params);
+        comm.setData(count);
+        comm.setCode(200);
+        comm.setMessage("操作成功");
+        return comm;
+    }
+
+    @Override
+    public CommonResult updateStatus(List<Long> ids, Integer recommendStatus) {
+        CommonResult comm = new CommonResult();
+        Map<String,Object> map = new HashMap<>();
+        map.put("ids",ids);
+        map.put("recommendStatus",recommendStatus);
+        Integer count  = smsHomeBrandMapper.updateStatus(map);
         comm.setData(count);
         comm.setCode(200);
         comm.setMessage("操作成功");
