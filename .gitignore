@@ -1,0 +1,7 @@
+# Project exclude paths
+/mall_admin/target/
+/mall_comment/target/
+/mall_commodity/target/
+/mall_order/target/
+/mall_promotion/target/
+/mall_service/target/

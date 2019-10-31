@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mr.mall.mall_comment.mapper.SmsHomeRecommendProductMapper">
+
+
+  <select id="getTotal" resultType="java.lang.Integer" parameterType="com.mr.mall.mall_comment.entity.SmsHomeRecommendProduct">
+    select count(*) from sms_home_recommend_product
+  </select>
+
+    <!--人气推荐表，关联商品表的查询，以及分页展示还有去除重复-->
+  <select id="findShrpList" resultType="com.mr.mall.mall_comment.entity.SmsHomeRecommendProduct" parameterType="com.mr.mall.mall_comment.entity.SmsHomeRecommendProduct">
+   SELECT DISTINCT shrp.id,shrp.product_name,shrp.product_id,shrp.recommend_status,shrp.sort  FROM
+    sms_home_recommend_product shrp
+    LEFT JOIN pms_product pp ON
+    shrp.`recommend_status`=pp.`recommand_status`
+    ORDER BY shrp.sort DESC
+    limit #{startNum},#{pageSize}
+  </select>
+
+    <!--单独删除和批量删除-->
+  <delete id="delete"  parameterType="java.util.List">
+        delete from sms_home_recommend_product where id in
+        <foreach collection="list" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+
+  </delete>
+
+    <update id="updateStatus" parameterType="java.util.Map">
+        <foreach collection="ids" item="id" separator=";" close=";" >
+            update sms_home_recommend_product set recommend_Status=#{recommendStatus} where id=#{id}
+        </foreach>
+    </update>
+
+    <!--单独修改-->
+   <!-- <update id="updateStatusById" parameterType="java.util.Map">
+        update sms_home_recommend_product set recommend_Status=#{recommendStatus} where id=#{id}
+    </update>-->
+
+
+
+    <update id="updateSort" parameterType="java.util.Map">
+        UPDATE sms_home_recommend_product SET sort = #{sort} WHERE id = #{id}
+    </update>
+
+    <insert id="insert" parameterType="com.mr.mall.mall_comment.entity.SmsHomeRecommendProduct">
+        insert into sms_home_recommend_product values(#{id},#{product_id},#{product_name},#{recommend_status}.#{sort})
+    </insert>
+</mapper>
